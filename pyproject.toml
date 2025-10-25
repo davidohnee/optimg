@@ -1,6 +1,6 @@
 [project]
 name = "optimg"
-version = "0.1.2"
+version = "0.1.3"
 description = "A simple image optimization tool"
 readme = "README.md"
 authors = [
