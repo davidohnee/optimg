@@ -21,16 +21,21 @@ def _get_args() -> argparse.Namespace:
     parser.add_argument(
         "--resize-mode",
         type=str,
-        default=None,
-        help="Type [f]it & crop or [c]ontain",
-        choices=["f", "c", None],
+        default="c",
+        help="Resize mode: [f]it & crop, [c]ontain, or [n]one",
+        choices=["f", "c", "n"],
     )
-    parser.add_argument("--max-res", type=int, default=2560, help="Max resolution (px)")
+    parser.add_argument(
+        "--max-res",
+        type=int,
+        default=2560,
+        help="Max resolution (px). Only used if resize-mode is set.",
+    )
     parser.add_argument("--format", "-f", type=str, default="webp", help="Output image format")
     parser.add_argument(
         "--quality",
         type=int,
-        default=100,
+        default=80,
         help="Output image quality (1-100) or compression level if lossless (1-100)",
     )
     parser.add_argument(
@@ -50,9 +55,8 @@ def main() -> None:
     files = get_images_in_dir(input_dir)
 
     # max_res specified but resize_mode not specified
-    if args.max_res is not None and args.resize_mode is None:
-        args.resize_mode = "c"
-        logger.info("Auto setting resize mode to 'c' (contain). Use --resize-mode to override.")
+    if args.resize_mode == "n":
+        args.resize_mode = None
 
     if args.lossless and args.format.lower() != "webp":
         logger.warning("Lossless option is only supported for webp format. Ignoring --lossless.")
