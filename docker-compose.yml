@@ -1,0 +1,7 @@
+services:
+    optimiser:
+        image: ghcr.io/davidohnee/optimg:main
+        build: .
+        volumes:
+            - ${INPUT:-./in}:/in
+            - ${OUTPUT:-./out}:/out

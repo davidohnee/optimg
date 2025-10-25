@@ -38,3 +38,18 @@ optimg --help
 
 Note that the `--lossless` option is only applicable when the output format is set to `webp`.
 The quality parameter will then control the compression level for lossless webp images, where 100 is the most compression.
+
+## Usage with Docker
+
+You can also run Optimg using Docker. First, build the Docker image:
+
+```bash
+docker run -v ./in:/in -v ./out:/out ghcr.io/davidohnee/optimg:main --resize-mode n
+```
+
+Or use Docker Compose:
+
+```bash
+curl https://raw.githubusercontent.com/davidohnee/optimg/main/docker-compose.yml -o docker-compose.yml
+docker compose up
+```
