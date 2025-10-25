@@ -8,7 +8,6 @@ name: Docker
 on:
     workflow_run:
         workflows: ["Publish"]
-        branches: [main]
         types:
             - completed
 
